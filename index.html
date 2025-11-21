@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food App</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:#fff9f4;height:100vh;overflow-x:hidden}
+.food{position:absolute;width:90px;opacity:.8;animation:float 6s infinite ease-in-out;z-index:-1}
+.food:nth-child(1){top:10%;left:15%;animation-delay:0s}
+.food:nth-child(2){top:60%;left:5%;animation-delay:1s}
+.food:nth-child(3){top:20%;right:10%;animation-delay:2s}
+.food:nth-child(4){top:70%;right:18%;animation-delay:3s}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-25px)}100%{transform:translateY(0)}}
+.page{height:100vh;width:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative}
+.page h1{font-size:45px;font-weight:600;color:#ff6a00;margin-bottom:20px}
+.arrow{font-size:40px;color:#ff6a00;cursor:pointer;transition:.3s}
+.arrow:hover{transform:translateY(5px)}
+.container{width:350px;background:#fff;padding:30px;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.1);margin-top:50px;transition:.4s}
+.logo{width:90px;margin:auto;display:block;animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.07)}100%{transform:scale(1)}}
+h2{text-align:center;margin:10px 0 25px;font-weight:600;color:#333}
+.input-box{margin-bottom:18px}
+.input-box input{width:100%;padding:13px 15px;border:1px solid #ddd;border-radius:10px;font-size:15px;transition:.25s}
+.input-box input:focus{border-color:#ff6a00;outline:none;box-shadow:0 0 5px rgba(255,106,0,0.4)}
+.btn{width:100%;padding:13px;background:#ff6a00;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;transition:.3s}
+.btn:hover{background:#ff7b22;transform:translateY(-2px)}
+.link{text-align:center;margin-top:15px;font-size:14px}
+.link a{text-decoration:none;color:#ff6a00;font-weight:500;cursor:pointer}
+.hide{display:none}
+.shake{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046869.png" class="food">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046854.png" class="food">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" class="food">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046871.png" class="food">
+
+<div class="page">
+<h1>Welcome to FoodApp</h1>
+<div class="arrow" onclick="goLogin()">⬇</div>
+</div>
+
+<div class="page" id="login">
+<div class="container" id="loginCard">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" class="logo">
+<h2>Login</h2>
+<div class="input-box">
+<input type="text" id="luser" placeholder="Email or Username">
+</div>
+<div class="input-box">
+<input type="password" id="lpass" placeholder="Password">
+</div>
+<button class="btn" onclick="login()">Login</button>
+<div class="link">
+<p>New here? <a onclick="openSignup()">Create Account</a></p>
+</div>
+</div>
+</div>
+
+<div class="page hide" id="signup">
+<div class="container" id="signupCard">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" class="logo">
+<h2>Create Account</h2>
+
+<div class="input-box">
+<input type="text" id="name" placeholder="Full Name">
+</div>
+
+<div class="input-box">
+<input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="input-box">
+<input type="text" id="contact" placeholder="Contact Number">
+</div>
+
+<div class="input-box">
+<input type="password" id="spass" placeholder="Password">
+</div>
+
+<div class="input-box">
+<input type="password" id="cpass" placeholder="Confirm Password">
+</div>
+
+<button class="btn" onclick="signup()">Create Account</button>
+
+<div class="link">
+<p>Already a user? <a onclick="openLogin()">Login</a></p>
+</div>
+
+</div>
+</div>
+
+<script>
+function goLogin(){
+document.getElementById("login").scrollIntoView({behavior:"smooth"})
+}
+
+function openSignup(){
+document.getElementById("login").classList.add("hide")
+document.getElementById("signup").classList.remove("hide")
+document.getElementById("signup").scrollIntoView({behavior:"smooth"})
+}
+
+function openLogin(){
+document.getElementById("signup").classList.add("hide")
+document.getElementById("login").classList.remove("hide")
+document.getElementById("login").scrollIntoView({behavior:"smooth"})
+}
+
+function login(){
+let u=document.getElementById("luser").value.trim()
+let p=document.getElementById("lpass").value.trim()
+let c=document.getElementById("loginCard")
+if(u===""||p===""){
+c.classList.add("shake")
+setTimeout(()=>c.classList.remove("shake"),300)
+return
+}
+alert("Login Successful")
+}
+
+function signup(){
+let n=document.getElementById("name").value.trim()
+let e=document.getElementById("email").value.trim()
+let c=document.getElementById("contact").value.trim()
+let p=document.getElementById("spass").value.trim()
+let cp=document.getElementById("cpass").value.trim()
+let card=document.getElementById("signupCard")
+
+if(n===""||e===""||c===""||p===""||cp===""){
+card.classList.add("shake")
+setTimeout(()=>card.classList.remove("shake"),300)
+return
+}
+if(p!==cp){
+alert("Password doesn't match")
+return
+}
+alert("Account Created Successfully")
+openLogin()
+}
+</script>
+
+</body>
+</html>
