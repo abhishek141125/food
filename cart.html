@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  background:#fff8ee;
+  font-family:Poppins;
+  padding:20px;
+}
+.title{
+  text-align:center;
+  font-size:26px;
+  font-weight:600;
+  color:#ff6a00;
+}
+.box{
+  max-width:360px;
+  margin:30px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+}
+.item{
+  padding:12px 15px;
+  font-size:16px;
+  border-bottom:1px solid #eee;
+}
+.bill{
+  width:100%;
+  padding:14px;
+  background:#ff6a00;
+  color:#fff;
+  border:none;
+  margin-top:20px;
+  border-radius:10px;
+  font-size:16px;
+}
+</style>
+<script>
+let list = JSON.parse(localStorage.getItem("cart")) || []
+function loadCart(){
+  let d=""
+  list.forEach(i=>{
+    d+=`<div class='item'>${i}</div>`
+  })
+  document.getElementById("data").innerHTML = d
+}
+function goBill(){
+  window.location.href="bill.html"
+}
+</script>
+</head>
+<body onload="loadCart()">
+
+<div class="title">Your Cart</div>
+
+<div class="box">
+<div id="data"></div>
+<button class="bill" onclick="goBill()">Generate Bill</button>
+</div>
+
+</body>
+</html>

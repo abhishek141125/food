@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  background:#fff8ee;
+  font-family:Poppins;
+  padding:20px;
+}
+.title{
+  text-align:center;
+  font-size:26px;
+  font-weight:600;
+  color:#ff6a00;
+  margin-top:10px;
+}
+.box{
+  max-width:360px;
+  margin:30px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+}
+.item{
+  font-size:16px;
+  padding:12px 15px;
+  background:#fff;
+  border-radius:12px;
+  margin:10px 0;
+  border:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  transition:.25s;
+}
+.item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+.add{
+  background:#ff6a00;
+  padding:6px 12px;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+}
+.cart{
+  width:100%;
+  padding:14px;
+  background:#ff6a00;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  margin-top:20px;
+  font-size:16px;
+}
+</style>
+<script>
+let items=[]
+function addItem(name){
+  items.push(name)
+  localStorage.setItem("cart",JSON.stringify(items))
+  alert(name+" added to cart")
+}
+function openCart(){
+  window.location.href="cart.html"
+}
+</script>
+</head>
+<body>
+
+<div class="title">Order Menu</div>
+
+<div class="box">
+
+<div class="item">
+<span>Pizza</span>
+<div class="add" onclick="addItem('Pizza')">Add</div>
+</div>
+
+<div class="item">
+<span>Burger</span>
+<div class="add" onclick="addItem('Burger')">Add</div>
+</div>
+
+<div class="item">
+<span>Pasta</span>
+<div class="add" onclick="addItem('Pasta')">Add</div>
+</div>
+
+<div class="item">
+<span>Cold Coffee</span>
+<div class="add" onclick="addItem('Cold Coffee')">Add</div>
+</div>
+
+<div class="item">
+<span>French Fries</span>
+<div class="add" onclick="addItem('French Fries')">Add</div>
+</div>
+
+<button class="cart" onclick="openCart()">Go to Cart</button>
+
+</div>
+
+</body>
+</html>
