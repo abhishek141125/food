@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
 <style>
 body{
   margin:0;
@@ -30,12 +32,12 @@ body{
 .item{
   font-size:16px;
   padding:12px 15px;
-  background:#fff;
   border-radius:12px;
   margin:10px 0;
   border:1px solid #eee;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   transition:.25s;
 }
 .item:hover{
@@ -44,11 +46,10 @@ body{
 }
 .add{
   background:#ff6a00;
-  padding:6px 12px;
+  padding:6px 14px;
   color:#fff;
   border-radius:6px;
   cursor:pointer;
-  font-size:14px;
 }
 .cart{
   width:100%;
@@ -61,18 +62,24 @@ body{
   font-size:16px;
 }
 </style>
+
 <script>
-let items=[]
-function addItem(name){
-  items.push(name)
-  localStorage.setItem("cart",JSON.stringify(items))
-  alert(name+" added to cart")
+function addItem(name, price){
+  let cart = JSON.parse(localStorage.getItem("cart")) || []
+  cart.push({name:name, price:price})
+  localStorage.setItem("cart", JSON.stringify(cart))
+  alert(name + " added to cart")
 }
 function openCart(){
-  window.location.href="cart.html"
+window.location.href = "cart.html"
+<button class="btn" onclick="open('order.html')">Order</button>
+<button class="btn" onclick="open('bill.html')">Bill</button>
+    
+  
 }
 </script>
 </head>
+
 <body>
 
 <div class="title">Order Menu</div>
@@ -80,31 +87,41 @@ function openCart(){
 <div class="box">
 
 <div class="item">
-<span>Pizza</span>
-<div class="add" onclick="addItem('Pizza')">Add</div>
+<span>Pizza - ₹180</span>
+<div class="add" onclick="addItem('Pizza',180)">Add</div>
 </div>
 
 <div class="item">
-<span>Burger</span>
-<div class="add" onclick="addItem('Burger')">Add</div>
+<span>Burger - ₹80</span>
+<div class="add" onclick="addItem('Burger',80)">Add</div>
 </div>
 
 <div class="item">
-<span>Pasta</span>
-<div class="add" onclick="addItem('Pasta')">Add</div>
+<span>Pasta - ₹150</span>
+<div class="add" onclick="addItem('Pasta',150)">Add</div>
 </div>
 
 <div class="item">
-<span>Cold Coffee</span>
-<div class="add" onclick="addItem('Cold Coffee')">Add</div>
+<span>Cold Coffee - ₹70</span>
+<div class="add" onclick="addItem('Cold Coffee',70)">Add</div>
 </div>
 
 <div class="item">
-<span>French Fries</span>
-<div class="add" onclick="addItem('French Fries')">Add</div>
+<span>French Fries - ₹90</span>
+<div class="add" onclick="addItem('French Fries',90)">Add</div>
 </div>
 
 <button class="cart" onclick="openCart()">Go to Cart</button>
+<button class="cart" onclick="localStorage.clear(); alert('Cart cleared')">Clear Cart</button>
+<button class="cart" onclick="window.location.reload()">Reload Page</button>
+<button class="cart" onclick="alert('Total items in cart: ' + (JSON.parse(localStorage.getItem('cart')) || []).length)">Show Cart Count</button>
+<button class="cart" onclick="console.log(JSON.parse(localStorage.getItem('cart')) || [])">Log Cart to Console</button>
+<button class="cart" onclick="alert('Thank you for using our service!')">Thank You</button>
+<button class="cart" onclick="window.location.href='index.html'">Back to Menu</button>
+<button class="cart" onclick="document.body.style.backgroundColor = '#ffe0b2'">Change BG Color</button>
+<button class="cart" onclick="document.body.style.fontFamily = 'Arial, sans-serif'">Change Font</button>
+<button class="cart" onclick="document.body.style.padding = '40px'">Increase Padding</button>
+<button class="cart" onclick="document.body.style.margin = '0 auto'; document.body.style.maxWidth = '600px'">Center Content</button>
 
 </div>
 

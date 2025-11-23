@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:#fff8ee;
+  font-family:Poppins;
+  padding:20px;
+}
+.title{
+  text-align:center;
+  font-size:26px;
+  font-weight:600;
+  color:#ff6a00;
+}
+.box{
+  max-width:360px;
+  margin:40px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+}
+.row{
+  font-size:17px;
+  padding:10px 0;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+}
+.total{
+  text-align:center;
+  font-size:22px;
+  margin-top:20px;
+  color:#ff6a00;
+  font-weight:600;
+}
+.pay{
+  width:100%;
+  padding:14px;
+  background:#ff6a00;
+  color:#fff;
+  border:none;
+  margin-top:20px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
+
+<script>
+let items = JSON.parse(localStorage.getItem("cart")) || []
+function loadBill(){
+  let out="", total=0
+  items.forEach(i=>{
+    out+=`<div class='row'><span>${i.name}</span><span>₹${i.price}</span></div>`
+    total += i.price
+  })
+  document.getElementById("bill").innerHTML = out
+  document.getElementById("amt").innerHTML = total
+}
+
+function pay(){
+  let amt = document.getElementById("amt").innerText * 100
+  var options = {
+    key: "rzp_test_1234567890",
+    amount: amt,
+    currency: "INR",
+    name: "Food App",
+    description: "Order Payment",
+    theme: { color: "#ff6a00" }
+  }
+  var rzp = new Razorpay(options)
+  rzp.open()
+}
+</script>
+</head>
+
+<body onload="loadBill()">
+
+<div class="title">Final Bill</div>
+
+<div class="box">
+<div id="bill"></div>
+
+<div class="total">Total: ₹<span id="amt"></span></div>
+
+<button class="pay" onclick="pay()">Pay Now</button>
+</div>
+
+</body>
+</html>
