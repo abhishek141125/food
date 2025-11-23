@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  background:#fff8ee;
+  font-family:Poppins;
+  padding:20px;
+}
+.header{
+  text-align:center;
+  font-size:28px;
+  font-weight:600;
+  color:#ff6a00;
+  margin-top:10px;
+  animation:fade 1.2s ease;
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.wrap{
+  max-width:380px;
+  margin:25px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 35px rgba(0,0,0,0.1);
+  animation:pop .7s ease;
+}
+@keyframes pop{
+  from{opacity:0; transform:scale(.95);}
+  to{opacity:1; transform:scale(1);}
+}
+.day{
+  font-size:19px;
+  margin-top:20px;
+  font-weight:600;
+  color:#ff6a00;
+}
+.item{
+  font-size:16px;
+  padding:12px 15px;
+  background:#fff;
+  border-radius:12px;
+  margin:10px 0;
+  transition:.25s;
+  border:1px solid #f0e4db;
+}
+.item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+.order{
+  margin-top:28px;
+  width:100%;
+  padding:14px;
+  background:#ff6a00;
+  color:#fff;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.3s;
+}
+.order:hover{
+  background:#ff7d27;
+  transform:translateY(-3px);
+}
+</style>
+</head>
+<body>
+
+<div class="header">Weekly Menu</div>
+
+<div class="wrap">
+
+<div class="day">Monday</div>
+<div class="item">Veg Thali</div>
+<div class="item">Dal Fry</div>
+<div class="item">Jeera Rice</div>
+
+<div class="day">Tuesday</div>
+<div class="item">Pav Bhaji</div>
+<div class="item">Cheese Pulav</div>
+<div class="item">Masala Khichdi</div>
+
+<div class="day">Wednesday</div>
+<div class="item">Masala Dosa</div>
+<div class="item">Idli Sambar</div>
+<div class="item">Upma</div>
+
+<div class="day">Thursday</div>
+<div class="item">Margherita Pizza</div>
+<div class="item">French Fries</div>
+<div class="item">Garlic Bread</div>
+
+<div class="day">Friday</div>
+<div class="item">Veg Burger</div>
+<div class="item">Cold Coffee</div>
+<div class="item">Grilled Sandwich</div>
+
+<div class="day">Saturday</div>
+<div class="item">White Sauce Pasta</div>
+<div class="item">Red Sauce Pasta</div>
+<div class="item">Cheese Nachos</div>
+
+<button class="order">Order Now</button>
+
+</div>
+
+</body>
+</html>
+        </div>
+    
+        <div class="day-row">
+            <div class="day"><span class="emoji">🍜</span> Sunday</div>
+            <ul class="items">
+            <li class="item">Ramen <span class="meta">(Hot)</span></li>
+            <li class="item">Spring Rolls <span class="meta">(Crispy)</span></li>
+            </ul>
+        </div>
+    
+        </div>
+    
+    </div>
