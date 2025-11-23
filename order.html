@@ -72,10 +72,6 @@ function addItem(name, price){
 }
 function openCart(){
 window.location.href = "cart.html"
-<button class="btn" onclick="open('order.html')">Order</button>
-<button class="btn" onclick="open('bill.html')">Bill</button>
-    
-  
 }
 </script>
 </head>
@@ -113,16 +109,6 @@ window.location.href = "cart.html"
 
 <button class="cart" onclick="openCart()">Go to Cart</button>
 <button class="cart" onclick="localStorage.clear(); alert('Cart cleared')">Clear Cart</button>
-<button class="cart" onclick="window.location.reload()">Reload Page</button>
-<button class="cart" onclick="alert('Total items in cart: ' + (JSON.parse(localStorage.getItem('cart')) || []).length)">Show Cart Count</button>
-<button class="cart" onclick="console.log(JSON.parse(localStorage.getItem('cart')) || [])">Log Cart to Console</button>
-<button class="cart" onclick="alert('Thank you for using our service!')">Thank You</button>
-<button class="cart" onclick="window.location.href='index.html'">Back to Menu</button>
-<button class="cart" onclick="document.body.style.backgroundColor = '#ffe0b2'">Change BG Color</button>
-<button class="cart" onclick="document.body.style.fontFamily = 'Arial, sans-serif'">Change Font</button>
-<button class="cart" onclick="document.body.style.padding = '40px'">Increase Padding</button>
-<button class="cart" onclick="document.body.style.margin = '0 auto'; document.body.style.maxWidth = '600px'">Center Content</button>
-
 </div>
 
 </body>

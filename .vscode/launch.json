@@ -10,19 +10,9 @@
             "request": "attach",
             "type": "chrome",
             "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Open index.html",
-            "file": "c:\\Users\\abhis\\OneDrive\\Documents\\GitHub\\food\\index.html"
         }
+
+
+        
     ]
 }

@@ -1,278 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weekly Menu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-  :root{
-    --accent:#ff6a00;
-    --bg:#fbf7f2;
-    --card:#ffffff;
-    --muted:#777;
-    --glass: rgba(255,255,255,0.6);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    background: linear-gradient(180deg, var(--bg) 0%, #fff 100%);
-    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    padding:24px;
-    --x:50%; --y:50%;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  /* subtle cursor spotlight */
-  body::after{
-    content:'';
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background: radial-gradient(circle at var(--x) var(--y), rgba(255,106,0,0.10) 0, rgba(255,106,0,0.02) 10%, transparent 40%);
-    mix-blend-mode: screen;
-    transition: background 120ms linear;
-  }
-
-  .wrapper{
-    max-width:760px;
-    margin:0 auto;
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .title{
-    width:100%;
-    text-align:center;
-    font-size:28px;
-    font-weight:600;
-    color:var(--accent);
-    margin:6px 0 18px 0;
-    letter-spacing:0.2px;
-  }
-
-  .card{
-    width:100%;
-    max-width:420px;
-    background:var(--card);
-    padding:20px;
-    border-radius:14px;
-    border:1px solid #f3e9e0;
-    box-shadow: 0 8px 28px rgba(20,20,20,0.06);
-    animation: pop .42s cubic-bezier(.2,.9,.3,1);
-  }
-
-  @keyframes pop{
-    from{ transform: translateY(10px); opacity:0 }
-    to{ transform: translateY(0); opacity:1 }
-  }
-
-  .day-row{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    margin-top:14px;
-  }
-
-  .day{
-    min-width:110px;
-    font-size:17px;
-    color:var(--accent);
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-
-  .items{
-    flex:1;
-    background:linear-gradient(180deg, rgba(250,250,250,0.6), transparent);
-    border-radius:10px;
-    padding:8px 10px;
-    list-style:none;
-    margin:0;
-  }
-
-  .item{
-    padding:10px 8px;
-    font-size:15px;
-    color:#222;
-    border-bottom:1px solid #f2f2f2;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    transition:transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s, color .12s;
-    cursor:pointer;
-    border-radius:8px;
-  }
-
-  .item:last-child{ border-bottom:none }
-
-  .item:hover{
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 12px 30px rgba(20,20,20,0.08);
-    color: var(--accent);
-    background: linear-gradient(180deg, rgba(255,106,0,0.03), rgba(255,106,0,0.01));
-  }
-
-  .item .meta{ font-size:13px; color:var(--muted) }
-
-  .order{
-    margin-top:18px;
-    width:100%;
-    padding:12px 14px;
-    background:linear-gradient(90deg,var(--accent), #ff8b3b);
-    color:#fff;
-    border:none;
-    font-size:16px;
-    font-weight:600;
-    border-radius:10px;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .order:active{ transform:scale(.99) }
-
-  /* ripple */
-  .ripple{
-    position:absolute;
-    border-radius:999px;
-    transform:translate(-50%,-50%) scale(0);
-    background: rgba(255,255,255,0.35);
-    animation: ripple 600ms ease-out;
-    pointer-events:none;
-  }
-
-  @keyframes ripple{ to{ transform: translate(-50%,-50%) scale(6); opacity:0 } }
-
-  /* small helper for icons */
-  .emoji{ font-size:18px }
-
-  /* responsive */
-  @media (max-width:520px){
-    .day{ min-width:86px; font-size:15px }
-    .card{ padding:16px }
-  }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  height:100vh;
+  font-family:Poppins;
+  background:linear-gradient(135deg,#ff8b3b,#ff6a00);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.card{
+  width:100%;
+  max-width:380px;
+  background:#fff;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 35px rgba(0,0,0,0.15);
+  animation:pop .55s ease;
+}
+@keyframes pop{
+  from{opacity:0;transform:translateY(20px) scale(.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.title{
+  text-align:center;
+  font-size:26px;
+  font-weight:600;
+  color:#ff6a00;
+  margin-bottom:10px;
+}
+.sub{
+  text-align:center;
+  font-size:14px;
+  color:#666;
+  margin-bottom:22px;
+}
+.input{
+  width:100%;
+  padding:14px;
+  border:1px solid #f0e4db;
+  border-radius:10px;
+  margin-top:12px;
+  font-size:15px;
+  transition:.25s;
+}
+.input:focus{
+  border-color:#ff6a00;
+  box-shadow:0 0 0 3px rgba(255,106,0,0.18);
+  outline:none;
+}
+.btn{
+  width:100%;
+  padding:14px;
+  background:#ff6a00;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  border-radius:12px;
+  cursor:pointer;
+  margin-top:22px;
+  transition:.25s;
+}
+.btn:hover{
+  background:#ff7d2a;
+  transform:translateY(-3px);
+}
+.signup{
+  text-align:center;
+  margin-top:18px;
+  font-size:14px;
+  color:#444;
+}
+.signup a{
+  color:#ff6a00;
+  text-decoration:none;
+  font-weight:500;
+}
+.circle{
+  position:fixed;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  filter:blur(40px);
+  z-index:-1;
+  animation:move 6s linear infinite alternate;
+}
+.circle2{
+  position:fixed;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.12);
+  filter:blur(40px);
+  z-index:-1;
+  animation:move2 7s linear infinite alternate;
+}
+@keyframes move{
+  from{top:8%; left:10%}
+  to{top:25%; left:60%}
+}
+@keyframes move2{
+  from{bottom:12%; right:12%}
+  to{bottom:30%; right:40%}
+}
+</style>
 </head>
 <body>
 
-  <div class="wrapper">
-    <div class="title">Weekly Menu</div>
+<div class="circle"></div>
+<div class="circle2"></div>
 
-    <div class="card" id="menuCard">
+<div class="card">
+  <div class="title">Welcome Back</div>
+  <div class="sub">Login to continue</div>
 
-      <div class="day-row">
-        <div class="day"><span class="emoji">🍽️</span> Monday</div>
-        <ul class="items">
-          <li class="item">Veg Thali <span class="meta">(Rice, Roti)</span></li>
-          <li class="item">Dal Fry <span class="meta">(Spicy)</span></li>
-          <li class="item">Chole Bhature <span class="meta">(New)</span></li>
-        </ul>
-      </div>
+  <input type="text" id="user" class="input" placeholder="Username">
+  <input type="password" id="pass" class="input" placeholder="Password">
 
-      <div class="day-row">
-        <div class="day"><span class="emoji">🌶️</span> Tuesday</div>
-        <ul class="items">
-          <li class="item">Pav Bhaji <span class="meta">(Buttery)</span></li>
-          <li class="item">Veg Pulav <span class="meta">(Fragrant)</span></li>
-        </ul>
-      </div>
+  <button class="btn" onclick="login()">Login</button>
 
-      <div class="day-row">
-        <div class="day"><span class="emoji">🥞</span> Wednesday</div>
-        <ul class="items">
-          <li class="item">Masala Dosa <span class="meta">(Crispy)</span></li>
-          <li class="item">Idli <span class="meta">(Soft)</span></li>
-          <li class="item">Sambar Bowl <span class="meta">(Extra)</span></li>
-        </ul>
-      </div>
+  <div class="signup">Don't have an account? <a href="#">Sign Up</a></div>
+</div>
 
-      <div class="day-row">
-        <div class="day"><span class="emoji">🍕</span> Thursday</div>
-        <ul class="items">
-          <li class="item">Pizza <span class="meta">(Cheesy)</span></li>
-          <li class="item">Fries <span class="meta">(Crispy)</span></li>
-        </ul>
-      </div>
-
-      <div class="day-row">
-        <div class="day"><span class="emoji">🍔</span> Friday</div>
-        <ul class="items">
-          <li class="item">Burger <span class="meta">(Juicy)</span></li>
-          <li class="item">Cold Coffee <span class="meta">(Iced)</span></li>
-        </ul>
-      </div>
-
-      <div class="day-row">
-        <div class="day"><span class="emoji">🍝</span> Saturday</div>
-        <ul class="items">
-          <li class="item">Pasta <span class="meta">(Creamy)</span></li>
-          <li class="item">Garlic Bread <span class="meta">(Garlicky)</span></li>
-        </ul>
-      </div>
-
-      <div class="day-row">
-        <div class="day"><span class="emoji">🌞</span> Sunday</div>
-        <ul class="items">
-          <li class="item">Special Thali <span class="meta">(Weekend)</span></li>
-          <li class="item">Sweet Lassi <span class="meta">(Refreshing)</span></li>
-        </ul>
-      </div>
-
-      <button class="order" id="orderBtn">Order Now</button>
-
-    </div>
-  </div>
-
-  <script>
-    // update todos: mark items completed
-    try{
-      // move spotlight with mouse
-      document.addEventListener('mousemove', function(e){
-        document.documentElement.style.setProperty('--x', e.clientX + 'px');
-        document.documentElement.style.setProperty('--y', e.clientY + 'px');
-      }, {passive:true});
-
-      // ripple effect for button
-      const order = document.getElementById('orderBtn');
-      order.addEventListener('click', function(e){
-        const r = document.createElement('span');
-        r.className = 'ripple';
-        const rect = order.getBoundingClientRect();
-        r.style.left = (e.clientX - rect.left) + 'px';
-        r.style.top = (e.clientY - rect.top) + 'px';
-        r.style.width = r.style.height = Math.max(rect.width, rect.height) + 'px';
-        order.appendChild(r);
-        setTimeout(()=> r.remove(), 700);
-        // small feedback: fake order placed
-        order.innerText = 'Order Placed ✓';
-        setTimeout(()=> order.innerText = 'Order Now', 1600);
-      });
-
-      // make items selectable (toggle) with small animation
-      document.querySelectorAll('.item').forEach(it => {
-        it.addEventListener('click', function(){
-          const sel = this.classList.toggle('selected');
-          if(sel){
-            this.style.background = 'linear-gradient(90deg, rgba(255,106,0,0.08), rgba(255,106,0,0.02))';
-            this.style.boxShadow = '0 12px 28px rgba(255,106,0,0.08)';
-          } else {
-            this.style.background = '';
-            this.style.boxShadow = '';
-          }
-        });
-      });
-    }catch(err){ console.error(err) }
-  </script>
+<script>
+function login(){
+  let u=document.getElementById("user").value
+  let p=document.getElementById("pass").value
+  if(u==="admin" && p==="123"){
+    window.location.href="home.html"
+  } else{
+    alert("Invalid Login")
+  }
+}
+</script>
 
 </body>
 </html>
