@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from restframework import serializers
 from .moduls import FoodItem
 
 class FoodItemSerializer(serializers.ModelSerializer):
