@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Order UI</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins, Arial;
+  background:#f6f0e8;
+}
+.container{
+  display:flex;
+}
+.left{
+  width:70%;
+  padding:20px;
+}
+.banner{
+  padding:20px;
+  background:#ff6a00;
+  color:white;
+  margin-bottom:20px;
+}
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+.tabs button{
+  border:none;
+  padding:10px 18px;
+  background:white;
+  border-radius:20px;
+  cursor:pointer;
+}
+.tabs .active{
+  background:#ff6a00;
+  color:white;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.card{
+  background:white;
+  padding:12px;
+  text-align:center;
+  transition:.2s;
+}
+.card:hover{
+  transform:scale(1.05);
+}
+.card button{
+  width:100%;
+  padding:8px;
+  background:#ff6a00;
+  color:white;
+  border:none;
+  margin-top:8px;
+  cursor:pointer;
+}
+aside{
+  width:30%;
+  background:white;
+  padding:20px;
+  border-left:2px solid #ddd;
+  height:100vh;
+  position:sticky;
+  top:0;
+}
+.cart-item{
+  background:#f3f3f3;
+  padding:10px;
+  margin-bottom:10px;
+}
+.checkout{
+  width:100%;
+  padding:12px;
+  background:#ff6a00;
+  color:white;
+  border:none;
+  margin-top:10px;
+  cursor:pointer;
+}
+.clear{
+  width:100%;
+  padding:12px;
+  background:#444;
+  color:white;
+  border:none;
+  margin-top:10px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+<div class="banner">
+  <span style="font-size:24px;font-weight:600;">Today Special</span>
+  <p>Gujarati • Punjabi • Snacks</p>
+</div>
+
+<div class="tabs">
+  <button class="active" onclick="filterFood('gujarati', this)">Gujarati</button>
+  <button onclick="filterFood('punjabi', this)">Punjabi</button>
+  <button onclick="filterFood('snacks', this)">Snacks</button>
+</div>
+
+<div id="food-list" class="grid"></div>
+
+</div>
+
+<!-- RIGHT -->
+<aside>
+  <h2>My Order</h2>
+  <hr>
+  <div id="cart-items"></div>
+  <p>Subtotal: ₹<span id="subtotal">0</span></p>
+  <p>Delivery: ₹<span id="delivery">20</span></p>
+  <h3>Total: ₹<span id="total">0</span></h3>
+  <button class="checkout" onclick="goToCart()">Checkout</button>
+  <button class="clear" onclick="clearCart()">Clear Cart</button>
+</aside>
+
+</div>
+
+<script>
+/* No image path in JS — images are mapped here */
+
+const foodData = [
+  { id:1, name:"Sev Tameta", price:90, category:"gujarati", img:"./src/assets/sev.png" },
+  { id:2, name:"Bhindi Fry", price:80, category:"gujarati", img:"./src/assets/bhindi.jpg" },
+  { id:3, name:"Rotla & Chaas", price:70, category:"gujarati", img:"./src/assets/rotla.jpg" },
+  { id:4, name:"Kadhi Khichdi", price:100, category:"gujarati", img:"./src/assets/kadikhichdi.jpg" },
+  { id:5, name:"Undhiyu", price:160, category:"gujarati", img:"./src/assets/undhiu.jpg" },
+  { id:6, name:"Fafda Jalebi", price:130, category:"gujarati", img:"./src/assets/fafda.jpg" },
+  { id:7, name:"Handvo", price:90, category:"gujarati", img:"./src/assets/handvo.jpg" },
+  { id:8, name:"Thepla", price:50, category:"gujarati", img:"./src/assets/thepla.jpg" },
+
+  { id:9, name:"Chole Bhature", price:120, category:"punjabi", img:"./src/assets/chole.jpg" },
+  { id:10, name:"Paneer Butter Masala", price:180, category:"punjabi", img:"./src/assets/paneer.jpg" },
+  { id:11, name:"Dal Makhani", price:150, category:"punjabi", img:"./src/assets/Dal.jpg" },
+  { id:12, name:"Tandoori Roti", price:20, category:"punjabi", img:"./src/assets/tandoori.jpg" },
+  { id:13, name:"Amritsari Kulcha", price:140, category:"punjabi", img:"./src/assets/kulcha.jpg" },
+  { id:14, name:"Chaap Tikka", price:170, category:"punjabi", img:"./src/assets/Chapp.jpg" },
+  { id:15, name:"Sweet Lassi", price:60, category:"punjabi", img:"./src/assets/Lassi.jpg" },
+
+  { id:16, name:"Pizza", price:180, category:"snacks", img:"./src/assets/Pizza.jpg" },
+  { id:17, name:"Burger", price:90, category:"snacks", img:"./src/assets/Burger.jpg" },
+  { id:18, name:"French Fries", price:100, category:"snacks", img:"./src/assets/fry.jpg" },
+  { id:19, name:"Cold Coffee", price:80, category:"snacks", img:"./src/assets/Cold.jpg" },
+  { id:20, name:"Spring Rolls", price:110, category:"snacks", img:"./src/assets/roll.jpg" },
+  { id:21, name:"Sandwich", price:90, category:"snacks", img:"./src/assets/san.jpg" },
+  { id:22, name:"Pasta", price:160, category:"snacks", img:"./src/assets/pasta.jpg" },
+  { id:23, name:"Garlic Bread", price:120, category:"snacks", img:"./src/assets/garlik.jpg" }
+];
+
+const foodList = document.getElementById("food-list");
+const cartItems = document.getElementById("cart-items");
+let cart = {};
+
+function renderFood(list){
+  foodList.innerHTML = "";
+  list.forEach(item=>{
+    foodList.innerHTML += `
+      <div class="card">
+        <img src="${item.img}" alt="${item.name}" style="width:100%; height:150px; object-fit:cover; border-radius:5px;">
+        <h3>${item.name}</h3>
+        <p>₹${item.price}</p>
+        <button onclick="addToCart(${item.id})">Add</button>
+      </div>
+    `;
+  });
+}
+
+function filterFood(type, btn){
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderFood(foodData.filter(item => item.category === type));
+}
+
+function addToCart(id){
+  if(!cart[id]) cart[id] = { ...foodData.find(i => i.id === id), qty: 0 };
+  cart[id].qty++;
+  renderCart();
+}
+
+function renderCart(){
+  cartItems.innerHTML = "";
+  let subtotal = 0;
+
+  Object.values(cart).forEach(item=>{
+    subtotal += item.price * item.qty;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <strong>${item.name}</strong><br>
+        Qty: ${item.qty} — ₹${item.price * item.qty}
+      </div>
+    `;
+  });
+
+  document.getElementById("subtotal").innerText = subtotal;
+  document.getElementById("total").innerText = subtotal + 20;
+}
+
+function clearCart(){
+  cart = {};
+  renderCart();
+}
+
+function goToCart(){
+  localStorage.setItem("cart", JSON.stringify(Object.values(cart)));
+  window.location.href = "cart.html";
+}
+
+filterFood("gujarati", document.querySelector(".tabs button"));
+</script>
+
+</body>
+</html>
