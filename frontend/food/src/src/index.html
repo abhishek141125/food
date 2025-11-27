@@ -19,11 +19,11 @@ body{
 }
 .card{
   width:100%;
-  max-width:380px;
+  max-width:420px;
   background:#fff;
-  padding:28px;
-  border-radius:18px;
-  box-shadow:0 8px 35px rgba(0,0,0,0.15);
+  padding:26px;
+  border-radius:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
 }
 .title{
   text-align:center;
@@ -69,6 +69,12 @@ body{
   font-weight:500;
 }
 .hide{display:none}
+@media (max-width:480px){
+  .card{ max-width:100%; padding:18px; border-radius:12px }
+  .title{ font-size:22px }
+  .input{ padding:12px; font-size:15px }
+  .btn{ padding:12px; font-size:15px }
+}
 </style>
 </head>
 <body>
