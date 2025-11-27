@@ -156,9 +156,10 @@ aside{
 </div>
 
 <script>
-/* No image path in JS — images are mapped here */
+/* Try loading menu from backend, otherwise fall back to local data */
+const BACKEND_URL = (new URLSearchParams(window.location.search)).get('backend') || 'http://localhost:8000/api/foods/';
 
-const foodData = [
+let foodData = [
   { id:1, name:"Sev Tameta", price:90, category:"gujarati", img:"./assets/sev.png" },
   { id:2, name:"Bhindi Fry", price:80, category:"gujarati", img:"./assets/bhindi.jpg" },
   { id:3, name:"Rotla & Chaas", price:70, category:"gujarati", img:"./assets/rotla.jpg" },
@@ -206,7 +207,7 @@ function renderFood(list){
 
 function filterFood(type, btn){
   document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
+  if(btn) btn.classList.add("active");
   renderFood(foodData.filter(item => item.category === type));
 }
 
@@ -244,7 +245,36 @@ function goToCart(){
   window.location.href = "cart.html";
 }
 
-filterFood("gujarati", document.querySelector(".tabs button"));
+async function loadFoodsFromBackend(){
+  try{
+    const res = await fetch(BACKEND_URL, { mode: 'cors' });
+    if(!res.ok) throw new Error('Network response not ok');
+    const data = await res.json();
+    if(Array.isArray(data) && data.length){
+      foodData = data.map((it, idx)=>({
+        id: it.id ?? (1000+idx),
+        name: it.name ?? it.title ?? 'Item',
+        price: Number(it.price) || 0,
+        category: it.category || 'snacks',
+        img: it.image || it.img || './assets/Pizza.jpg'
+      }));
+      console.log('Loaded menu from backend, count=', foodData.length);
+    } else {
+      console.log('Backend returned no items, using local data');
+    }
+  }catch(err){
+    console.log('Could not load backend menu, using local data', err);
+  }
+}
+
+async function init(){
+  await loadFoodsFromBackend();
+  filterFood("gujarati", document.querySelector(".tabs button"));
+  setupMobileCartToggle();
+}
+
+// start
+init();
 
 // mobile cart toggle: show button only on small screens and toggle aside
 function setupMobileCartToggle(){
