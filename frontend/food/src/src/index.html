@@ -89,54 +89,13 @@ body{
     <input id="log_pass" class="input" type="password" placeholder="Password">
 
     <button class="btn" onclick="login()">Login</button>
-
-    <div class="toggle">No account? <a onclick="showSignup()">Sign Up</a></div>
   </div>
 
-  <div id="signupBox" class="hide">
-    <div class="title">Sign Up</div>
-
-    <input id="reg_user" class="input" placeholder="Username">
-    <input id="reg_contact" class="input" placeholder="Contact Number">
-    <input id="reg_pass" class="input" type="password" placeholder="Password">
-    <input id="reg_confirm" class="input" type="password" placeholder="Confirm Password">
-
-    <button class="btn" onclick="signup()">Create Account</button>
-
-    <div class="toggle">Already have account? <a onclick="showLogin()">Login</a></div>
-  </div>
-
+ 
 </div>
 
 <script>
-function showSignup(){
-  document.getElementById("loginBox").classList.add("hide")
-  document.getElementById("signupBox").classList.remove("hide")
-}
-function showLogin(){
-  document.getElementById("signupBox").classList.add("hide")
-  document.getElementById("loginBox").classList.remove("hide")
-}
-function signup(){
-  let user=document.getElementById("reg_user").value.trim()
-  let contact=document.getElementById("reg_contact").value.trim()
-  let pass=document.getElementById("reg_pass").value.trim()
-  let confirm=document.getElementById("reg_confirm").value.trim()
-
-  if(pass!=confirm){alert("Password mismatch");return}
-
-  let data=localStorage.getItem("users")
-  let users=data?JSON.parse(data):[]
-
-  let exists=users.find(x=>x.username==user || x.contact==contact)
-  if(exists){alert("User already exists");return}
-
-  users.push({username:user, contact:contact, password:pass})
-  localStorage.setItem("users",JSON.stringify(users))
-
-  alert("Account created")
-  showLogin()
-}
+// Sign-up functionality removed — only login is available on this page.
 function login(){
   let u=document.getElementById("log_user").value.trim()
   let p=document.getElementById("log_pass").value.trim()
