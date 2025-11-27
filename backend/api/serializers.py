@@ -4,4 +4,4 @@ from .models import FoodItem
 class FoodItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodItem
-        fields = "_all_"
+        fields = "__all__"

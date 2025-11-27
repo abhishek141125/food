@@ -4,6 +4,5 @@ class FoodItem(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     image = models.URLField()
-
-    def _str_(self):
+    def __str__(self):
         return self.name
