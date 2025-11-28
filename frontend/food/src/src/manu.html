@@ -96,7 +96,6 @@ aside{
   margin-top:10px;
   cursor:pointer;
 }
-/* Mobile adjustments */
 @media (max-width: 820px){
   .container{ flex-direction:column; }
   .left{ width:100%; }
@@ -272,10 +271,8 @@ async function init(){
   setupMobileCartToggle();
 }
 
-// start
 init();
 
-// mobile cart toggle: show button only on small screens and toggle aside
 function setupMobileCartToggle(){
   const wrap = document.getElementById('mobile-cart-toggle-wrap');
   const btn = document.getElementById('mobileCartBtn');

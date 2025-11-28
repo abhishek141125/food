@@ -123,7 +123,6 @@ function showLogin(){
 }
 
 async function register(){
-  // Get users from localStorage or initialize an empty array
   let users = JSON.parse(localStorage.getItem('users')) || [];
 
   let username = document.getElementById("reg_username").value.trim();
@@ -136,17 +135,13 @@ async function register(){
     return;
   }
 
-  // Check if user with same email or contact already exists
   const userExists = users.find(user => user.email === email || user.contact === contact);
   if(userExists){
     alert("User with this email or contact already exists. Please log in.");
     return;
   }
 
-  // Add new user to the array
   users.push({ username, email, contact, password });
-
-  // Save updated users array to localStorage
   localStorage.setItem('users', JSON.stringify(users));
 
   alert("Registration successful! You can now log in.");
@@ -154,7 +149,6 @@ async function register(){
 }
 
 async function login(){
-  // Get users from localStorage
   let users = JSON.parse(localStorage.getItem('users')) || [];
 
   let username_or_contact = document.getElementById("log_user").value.trim();
@@ -165,15 +159,12 @@ async function login(){
     return;
   }
 
-  // Find the user by email/contact and check the password
   const user = users.find(u => (u.email === username_or_contact || u.contact === username_or_contact) && u.password === password);
 
   if(user){
-    // If user is found and password is correct
     alert("Login successful!");
     window.location.href="manu.html";
   } else {
-    // If user not found or password incorrect
     alert("Invalid credentials. Please check your email/contact and password.");
   }
 }
