@@ -96,7 +96,6 @@ aside{
   margin-top:10px;
   cursor:pointer;
 }
-/* Mobile adjustments */
 @media (max-width: 820px){
   .container{ flex-direction:column; }
   .left{ width:100%; }
@@ -118,12 +117,10 @@ aside{
 
 <div class="container">
 
-<!-- Mobile toggle to show/hide cart -->
 <div style="display:none; padding:12px; background:transparent;" id="mobile-cart-toggle-wrap">
   <button id="mobileCartBtn" style="width:100%; padding:12px; background:#ff6a00; color:#fff; border:none; border-radius:8px;">Show Cart</button>
 </div>
 
-<!-- LEFT -->
 <div class="left">
 
 <div class="banner">
@@ -141,7 +138,6 @@ aside{
 
 </div>
 
-<!-- RIGHT -->
 <aside>
   <h2>My Order</h2>
   <hr>
@@ -156,8 +152,7 @@ aside{
 </div>
 
 <script>
-/* Try loading menu from backend, otherwise fall back to local data */
-const BACKEND_URL = (new URLSearchParams(window.location.search)).get('backend') || 'http://localhost:8000/api/foods/';
+const BACKEND_URL = 'http://localhost:8000/api/foods/';
 
 let foodData = [
   { id:1, name:"Sev Tameta", price:90, category:"gujarati", img:"./assets/sev.png" },
@@ -273,10 +268,8 @@ async function init(){
   setupMobileCartToggle();
 }
 
-// start
 init();
 
-// mobile cart toggle: show button only on small screens and toggle aside
 function setupMobileCartToggle(){
   const wrap = document.getElementById('mobile-cart-toggle-wrap');
   const btn = document.getElementById('mobileCartBtn');
@@ -303,4 +296,3 @@ setupMobileCartToggle();
 
 </body>
 </html>
-
