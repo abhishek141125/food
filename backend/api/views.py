@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from django.db.models import Q
 from .models import FoodItem, User
 from .serializers import FoodItemSerializer, UserSerializer
 
@@ -13,7 +14,10 @@ def get_foods(request):
 def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        user = serializer.save()
+        # Set and hash the password
+        user.set_password(request.data.get('password'))
+        user.save()
         return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -23,12 +27,16 @@ def login(request):
     password = request.data.get('password')
     try:
         user = User.objects.get(
-            models.Q(username=username_or_contact) |
-            models.Q(email=username_or_contact) |
-            models.Q(contact=username_or_contact)
+            Q(username=username_or_contact) |
+            Q(email=username_or_contact) |
+            Q(contact=username_or_contact)
         )
-        if user.password == password:
-            return Response({'message': 'Login successful', 'user': UserSerializer(user).data}, status=status.HTTP_200_OK)
+        # It's better to use Django's built-in password checking, 
+        # assuming passwords are hashed upon registration.
+        if user.check_password(password): # Or user.password == password if not hashed
+            serializer = UserSerializer(user)
+            user_data = serializer.data
+            return Response({'message': 'Login successful', 'user': user_data}, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
     except User.DoesNotExist:
