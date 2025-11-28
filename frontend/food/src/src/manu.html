@@ -156,8 +156,7 @@ aside{
 </div>
 
 <script>
-/* Try loading menu from backend, otherwise fall back to local data */
-const BACKEND_URL = (new URLSearchParams(window.location.search)).get('backend') || 'http://localhost:8000/api/foods/';
+const BACKEND_URL = 'http://localhost:8000/api/foods/';
 
 let foodData = [
   { id:1, name:"Sev Tameta", price:90, category:"gujarati", img:"./assets/sev.png" },
@@ -303,4 +302,3 @@ setupMobileCartToggle();
 
 </body>
 </html>
-

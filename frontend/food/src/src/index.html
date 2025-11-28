@@ -123,72 +123,58 @@ function showLogin(){
 }
 
 async function register(){
+  // Get users from localStorage or initialize an empty array
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
   let username = document.getElementById("reg_username").value.trim();
   let email = document.getElementById("reg_email").value.trim();
   let contact = document.getElementById("reg_contact").value.trim();
   let password = document.getElementById("reg_pass").value.trim();
 
   if(!username || !email || !contact || !password){
-    alert("All fields are required");
+    alert("All fields are required.");
     return;
   }
 
-  try {
-    let response = await fetch('http://localhost:8000/api/register/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        contact: contact,
-        password: password
-      })
-    });
-
-    let data = await response.json();
-    if(response.ok){
-      alert(data.message);
-      showLogin();
-    } else {
-      alert('Registration failed: ' + JSON.stringify(data));
-    }
-  } catch (error) {
-    alert('Error: ' + error.message);
+  // Check if user with same email or contact already exists
+  const userExists = users.find(user => user.email === email || user.contact === contact);
+  if(userExists){
+    alert("User with this email or contact already exists. Please log in.");
+    return;
   }
+
+  // Add new user to the array
+  users.push({ username, email, contact, password });
+
+  // Save updated users array to localStorage
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert("Registration successful! You can now log in.");
+  showLogin();
 }
 
 async function login(){
+  // Get users from localStorage
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
   let username_or_contact = document.getElementById("log_user").value.trim();
   let password = document.getElementById("log_pass").value.trim();
 
   if(!username_or_contact || !password){
-    alert("All fields are required");
+    alert("All fields are required.");
     return;
   }
 
-  try {
-    let response = await fetch('http://localhost:8000/api/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username_or_contact: username_or_contact,
-        password: password
-      })
-    });
+  // Find the user by email/contact and check the password
+  const user = users.find(u => (u.email === username_or_contact || u.contact === username_or_contact) && u.password === password);
 
-    let data = await response.json();
-    if(response.ok){
-      alert(data.message);
-      window.location.href="manu.html";
-    } else {
-      alert('Login failed: ' + data.message);
-    }
-  } catch (error) {
-    alert('Error: ' + error.message);
+  if(user){
+    // If user is found and password is correct
+    alert("Login successful!");
+    window.location.href="manu.html";
+  } else {
+    // If user not found or password incorrect
+    alert("Invalid credentials. Please check your email/contact and password.");
   }
 }
 </script>
